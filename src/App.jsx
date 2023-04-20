@@ -2,24 +2,19 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [title, setTitle] = useState("");
   const [lists, setLists] = useState([
     { id: 1, title: "react를 배워봅시다." },
     { id: 2, title: "useState를 배워봅시다." },
     { id: 3, title: "자바스크립트를 배워봅시다." },
   ]);
 
-  const [title, setTitle] = useState("");
-
   const onTitleChangeHandler = (event) => {
     setTitle(event.target.value);
   };
 
   function onClickHandler() {
-    const newList = {
-      id: lists.length + 1,
-      title: title,
-    };
-    setLists([...lists, newList]);
+    setLists([...lists, { id: lists.length + 1, title: title }]);
     setTitle("");
   }
 
@@ -33,13 +28,11 @@ function App() {
       <h1 className="Top">Todo list</h1>
 
       <div className="list-wrapper">
-        {lists.map(function (item) {
-          return (
-            <div key={item.id} className="component-style">
-              <div>{item.title}</div>
-            </div>
-          );
-        })}
+        {lists.map((item) => (
+          <div className="component-style" key={item.id}>
+            <div>{item.title}</div>
+          </div>
+        ))}
       </div>
     </>
   );
